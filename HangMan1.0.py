@@ -30,6 +30,7 @@ print(' '.join(print_array))
 
 if(count <=0):
     print("Game Over")
+
+#6.Congrats!
 else:
     print("Congrats you guessed the word")
-#6.Congrats!
