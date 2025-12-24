@@ -1,36 +1,51 @@
-#1. Welcome to HangMan! And initiliazation 
-print("Welcome to HangMan")
-print_array = []
+from pickle import TRUE
+count = 6
+someWords = []
+blank_list = []
+correct_guess = False
 blank = ""
-count = 5
 
-#2. Choose a number between 1-17 to choose a word from array
-someWords = ["apple, banana, mango, strawberry,orange,grape, pineapple, apricot, lemon, coconut, watermelon,cherry, papaya, berry, peach, lychee, muskmelon"]
+print("Welcome to HangMan")
+
+Words = "mango,orange,grape,apricot,lemon,coconut,watermelon,,peach,muskmelon"
+someWords = Words.split(",")
+value = int(input("Enter a number between 1-9 to choose a word from array: "))
+chosenWord = someWords[value -1]
+blank_list = ["_"] * len(chosenWord)
 
 try:
-    value = int(input("Enter a number between 1-17 to choose a word from array"))
+    while int(value) >9:
+        print("Please enter a number below 10")  
+        break
 except:
     print("Please enter a number and not string")
 
-chosenWord = someWords[value -1]
-#3. Choose a letter 
-chosenWord_array = list(chosenWord)
-for letters in chosenWord_array:
-    if(input("Please enter a letter/character") == letters):
-        blank += "_"
-        print_array = list(blank)       
-
-#4.If a letter is choosen, if it is not right it will display hangman
-    else:
-        print(count - 1)
-
-#5.If the letter of the word in the array is correct it will display on the terminal
-print(' '.join(print_array))
-
-
-if(count <=0):
-    print("Game Over")
-
-#6.Congrats!
 else:
-    print("Congrats you guessed the word")
+    while not correct_guess:
+        guess = input("Please key in a character: ")
+        
+
+        if guess in chosenWord:
+            for i in range(len(chosenWord)):
+                if chosenWord[i] == guess:
+                    blank_list[i] = guess
+                    print(' '.join(blank_list))
+        else:
+            count -= 1
+            print("There is no", guess)
+            print("Remaining tries:", count)
+
+        if count == 0:
+            print("Game Over")
+            break
+
+        if "_" not in blank_list:
+            correct_guess = True
+            print("Congrats! You won!")
+
+   
+
+       
+
+    
+    
